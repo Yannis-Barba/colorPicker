@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+    <title>Color Picker</title>
+</head>
+<body>
+    <div id="page">
+        <header class="mainContainer"> 
+            <h1 class="title">Insert a Color Picker in your website</h1> 
+            <h3 class="title"> Thanks iro package</h3>
+        </header>
+        <div id="main">
+            <div id="textContainer">
+                <h2 class="title">Some Text to colorized : </h2>
+            <p class="text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. </br> Illo repudiandae harum, hic autem quia vitae, quod quam fugit, repellendus error odio eos modi neque a atque! Facilis voluptatibus distinctio neque? </p>
+            </div>
+            <div id="textContainer">
+                <h2 class="title">Some Text to colorized : </h2>
+            <p class="text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. </br> Illo repudiandae harum, hic autem quia vitae, quod quam fugit, repellendus error odio eos modi neque a atque! Facilis voluptatibus distinctio neque? </p>
+            </div>
+            <div id="textContainer">
+                <h2 class="title">Some Text to colorized : </h2>
+            <p class="text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. </br> Illo repudiandae harum, hic autem quia vitae, quod quam fugit, repellendus error odio eos modi neque a atque! Facilis voluptatibus distinctio neque? </p>
+            </div>
+            
+        </div>
+        <footer class="mainContainer">
+            <h4 class="title"> Livecoding made by Yannis Barba </h4>
+        </footer>
+    </div>
+    <div id="colorPicker">
+        <div class="container">
+            <h4 class="title">Header & Footer</h4>
+            <div id="headerFooterPicker"></div>
+            <p id="headerFooterColor"></p>
+        </div>
+
+        <div class="container">
+            <h4 class="title">Title</h4>
+            <div id="titlePicker"></div>
+            <p id="titleColor"></p>
+        </div>
+        
+        <div class="container">
+            <h4 class="title">Text</h4>
+            <div id="textPicker"></div>
+            <p id="textColor"></p>
+        </div>
+        
+        <div class="container">
+            <h4 class="title">Border</h4>
+            <div id="borderPicker"></div>
+            <p id="borderColor"></p>
+        </div>
+        
+    </div>
+
+    <script>
+        //definition of the color Pickers 
+        let headerFooterColorPicker = new iro.ColorPicker('#headerFooterPicker', {width:150});
+        let titleColorPicker = new iro.ColorPicker('#titlePicker', {width:150});
+        let textColorPicker = new iro.ColorPicker('#textPicker', {width:150});
+        let borderColorPicker = new iro.ColorPicker('#borderPicker', {width:150});
+
+        //get element to be modified 
+        const mainContainers = document.querySelectorAll('.mainContainer');
+        const titles = document.querySelectorAll('.title');
+        const texts = document.querySelectorAll('.text');
+        const borders = document.querySelectorAll('#textContainer');
+
+        headerFooterColorPicker.on('input:move', (color) => {
+            const value = document.querySelector('#headerFooterColor');
+            value.innerHTML = color.hexString;
+            for(let container of mainContainers){
+                container.style.background = color.hexString;
+            }
+        })
+
+        titleColorPicker.on('color:change', (color) => {
+            const value = document.querySelector('#titleColor');
+            value.innerHTML = color.hexString;
+            for(let title of titles){
+                title.style.color = color.hexString;
+            }
+        })
+
+        textColorPicker.on('color:change', (color) => {
+            const value = document.querySelector('#textColor');
+            value.innerHTML = color.hexString;
+            for(let text of texts){
+                text.style.color = color.hexString;
+            }
+        })
+
+        borderColorPicker.on('color:change', (color) => {
+            const value = document.querySelector('#borderColor');
+            value.innerHTML = color.hexString;
+            for (let border of borders){
+                border.style.border = '2px solid'+ color.hexString;
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>
